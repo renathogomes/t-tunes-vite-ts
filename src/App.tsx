@@ -8,6 +8,7 @@ function App() {
       <p>Trybetunes</p>
       <Routes>
         <Route path="/" element={ <Login /> } />
+        <Route path="/search." element={ <Login /> } />
       </Routes>
     </>
   );

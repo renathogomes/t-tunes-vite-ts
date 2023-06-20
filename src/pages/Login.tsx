@@ -19,6 +19,8 @@ function Login() {
       .then(() => setLoading(false));
   };
 
+  const disableBtn = () => name.length >= 3;
+
   return (
     <form onSubmit={ handleSubmit }>
       <input
@@ -28,14 +30,15 @@ function Login() {
         value={ name }
         onChange={ handleNameChance }
       />
-      {name.length >= 3 ? <button
+      <button
         data-testid="login-submit-button"
         onClick={ handleClick }
+        disabled={ !disableBtn() }
       >
         Entrar
 
       </button>
-        : <button disabled data-testid="login-submit-button">Entrar</button>}
+      { loading ? (<p>Carregando...</p>) : null}
     </form>
   );
 }
