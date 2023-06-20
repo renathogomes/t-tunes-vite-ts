@@ -3,7 +3,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 function Login() {
   const [name, setName] = useState('');
 
-  const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
 
@@ -13,7 +13,6 @@ function Login() {
 
   return (
     <form onSubmit={ handleSubmit }>
-      <label htmlFor="name" />
       <input
         id="name"
         data-testid="login-name-input"
@@ -21,9 +20,8 @@ function Login() {
         value={ name }
         onChange={ handleNameChance }
       />
-      <button data-testid="login-submit-button">
-        Entrar
-      </button>
+      {name.length >= 3 ? <button data-testid="login-submit-button">Entrar</button>
+        : <button disabled data-testid="login-submit-button">Entrar</button>}
     </form>
   );
 }
