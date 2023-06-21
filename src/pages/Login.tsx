@@ -24,7 +24,6 @@ function Login() {
   return (
     <form onSubmit={ handleSubmit }>
       <input
-        id="name"
         data-testid="login-name-input"
         type="text"
         value={ name }
