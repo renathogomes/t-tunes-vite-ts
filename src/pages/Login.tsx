@@ -1,22 +1,24 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createUser } from '../services/userAPI';
 
 function Login() {
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  };
+  const navigate = useNavigate();
 
   const handleNameChance = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
 
-  const handleClick = () => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setLoading(true);
     createUser({ name })
-      .then(() => setLoading(false));
+      .then(() => {
+        setLoading(false);
+        navigate('/search');
+      });
   };
 
   const disableBtn = () => name.length >= 3;
@@ -31,8 +33,8 @@ function Login() {
       />
       <button
         data-testid="login-submit-button"
-        onClick={ handleClick }
         disabled={ !disableBtn() }
+        type="submit"
       >
         Entrar
 
