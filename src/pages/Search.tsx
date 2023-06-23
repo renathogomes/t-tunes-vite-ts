@@ -45,23 +45,24 @@ function Search() {
         Pesquisar
       </button>
       {albumId.length !== 0
-        ? (<div>
-          <p>{`Resultado de álbuns de: ${inputValue}`}</p>
-          {albumList.map((album) => (
-            <Link
-              key={ album.collectionId }
-              to={ `/album/${album.collectionId}` }
-              data-testid={ `link-to-album-${album.collectionId}` }
-            >
-              {album.collectionName}
-              <img
-                key={ album.artistId }
-                src={ album.artworkUrl100 }
-                alt="Albuns"
-              />
-            </Link>))}
-        </div>)
-        : <p>Nenhum álbum foi encontrado</p>}
+        ? (
+          <div>
+            <p>{`Resultado de álbuns de: ${inputValue}`}</p>
+            {albumList.map((album) => (
+              <Link
+                key={ album.collectionId }
+                to={ `/album/${album.collectionId}` }
+                data-testid={ `link-to-album-${album.collectionId}` }
+              >
+                {album.collectionName}
+                <img
+                  key={ album.artistId }
+                  src={ album.artworkUrl100 }
+                  alt="Albuns"
+                />
+              </Link>))}
+          </div>
+        ) : (<p>Nenhum álbum foi encontrado</p>)}
     </form>
   );
 }
