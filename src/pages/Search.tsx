@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { Link } from 'react-router-dom';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import { AlbumType } from '../types';
 
@@ -6,6 +7,7 @@ function Search() {
   const [artist, setArtist] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [albumList, setAlbumList] = useState<AlbumType[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const handleArtistChance = (event: ChangeEvent<HTMLInputElement>) => {
     setArtist(event.target.value);
@@ -15,13 +17,15 @@ function Search() {
   const getAlbum = async () => {
     const responseAlbum = await searchAlbumsAPI(inputValue);
     setAlbumList(responseAlbum);
-    console.log(albumList);
   };
+  const albumMap = albumList.map((album) => album.collectionId);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setArtist('');
     getAlbum();
+    setLoading(true);
+    console.log(albumMap);
   };
 
   const disableBtn = () => artist.length >= 2;
@@ -29,7 +33,6 @@ function Search() {
   return (
     <form onSubmit={ handleSubmit }>
       <input
-        id="inputLabel"
         type="text"
         data-testid="search-artist-input"
         value={ artist }
@@ -44,6 +47,19 @@ function Search() {
       >
         Pesquisar
       </button>
+      {albumMap.length !== 0
+        ? (<p>{`Resultado de álbuns de: ${inputValue}`}</p>)
+        : <p>Nenhum álbum foi encontrado</p>}
+
+      <div>
+        <Link
+          to={ `/album/${albumMap}` }
+          data-testid={ `link-to-album-${albumMap}` }
+        >
+          {albumMap}
+        </Link>
+      </div>
+
     </form>
   );
 }
