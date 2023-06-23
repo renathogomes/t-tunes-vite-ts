@@ -17,14 +17,14 @@ function Search() {
     const responseAlbum = await searchAlbumsAPI(inputValue);
     setAlbumList(responseAlbum);
   };
-  const albumMap = albumList.map((album) => album.collectionId);
-  const albumMapImg = albumList.map((album) => album.artworkUrl100);
+  const albumId = albumList.map((album) => album.collectionId);
+  const albumImg = albumList.map((album) => album.artworkUrl100);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setArtist('');
     getAlbum();
-    console.log(albumMap);
+    console.log(albumId);
   };
 
   const disableBtn = () => artist.length >= 2;
@@ -46,18 +46,20 @@ function Search() {
       >
         Pesquisar
       </button>
-      {albumMap.length !== 0
-        ? (<p>{`Resultado de álbuns de: ${inputValue}`}</p>)
+      {albumId.length !== 0
+        ? (<div>
+          <p>{`Resultado de álbuns de: ${inputValue}`}</p>
+          {albumList.map((album) => (
+            <Link
+              key={ album.collectionId }
+              to={ `/album/${album.collectionId}` }
+              data-testid={ `link-to-album-${album.collectionId}` }
+            >
+              <img key={ album.artistId } src={ album.artworkUrl100 } alt="Albuns" />
+            </Link>))}
+        </div>)
         : <p>Nenhum álbum foi encontrado</p>}
 
-      <div>
-        <Link
-          to={ `/album/${albumMap}` }
-          data-testid={ `link-to-album-${albumMap}` }
-        >
-          {albumMapImg.map((img) => <img key={ img } src={ img } alt="Albuns" />)}
-        </Link>
-      </div>
     </form>
   );
 }
