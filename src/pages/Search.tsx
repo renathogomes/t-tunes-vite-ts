@@ -18,13 +18,11 @@ function Search() {
     setAlbumList(responseAlbum);
   };
   const albumId = albumList.map((album) => album.collectionId);
-  const albumImg = albumList.map((album) => album.artworkUrl100);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setArtist('');
     getAlbum();
-    console.log(albumId);
   };
 
   const disableBtn = () => artist.length >= 2;
@@ -64,7 +62,6 @@ function Search() {
             </Link>))}
         </div>)
         : <p>Nenhum álbum foi encontrado</p>}
-
     </form>
   );
 }
