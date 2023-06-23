@@ -55,7 +55,12 @@ function Search() {
               to={ `/album/${album.collectionId}` }
               data-testid={ `link-to-album-${album.collectionId}` }
             >
-              <img key={ album.artistId } src={ album.artworkUrl100 } alt="Albuns" />
+              {album.collectionName}
+              <img
+                key={ album.artistId }
+                src={ album.artworkUrl100 }
+                alt="Albuns"
+              />
             </Link>))}
         </div>)
         : <p>Nenhum álbum foi encontrado</p>}
