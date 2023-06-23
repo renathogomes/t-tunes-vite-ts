@@ -7,7 +7,6 @@ function Search() {
   const [artist, setArtist] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [albumList, setAlbumList] = useState<AlbumType[]>([]);
-  const [loading, setLoading] = useState(false);
 
   const handleArtistChance = (event: ChangeEvent<HTMLInputElement>) => {
     setArtist(event.target.value);
@@ -19,12 +18,12 @@ function Search() {
     setAlbumList(responseAlbum);
   };
   const albumMap = albumList.map((album) => album.collectionId);
+  const albumMapImg = albumList.map((album) => album.artworkUrl100);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setArtist('');
     getAlbum();
-    setLoading(true);
     console.log(albumMap);
   };
 
@@ -56,10 +55,9 @@ function Search() {
           to={ `/album/${albumMap}` }
           data-testid={ `link-to-album-${albumMap}` }
         >
-          {albumMap}
+          {albumMapImg.map((img) => <img key={ img } src={ img } alt="Albuns" />)}
         </Link>
       </div>
-
     </form>
   );
 }
