@@ -19,7 +19,6 @@ function Album() {
     };
     musicFetch();
   }, [paramId]);
-  console.log(album);
 
   return (
     <div>
