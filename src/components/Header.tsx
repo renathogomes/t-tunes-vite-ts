@@ -23,7 +23,7 @@ function Header() {
       ) : (
         <>
           <NavLink
-            to="/seach"
+            to="/search"
             data-testid="link-to-search"
           >
             Pasquisar
