@@ -4,16 +4,17 @@ import { getUser } from '../services/userAPI';
 
 function Header() {
   const [nameUser, setnameUser] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const nameLoad = async () => {
-      setLoading(false);
-      const { name } = await getUser;
+      setLoading(true);
+      const { name } = await getUser();
       setnameUser(name);
+      setLoading(false);
     };
     nameLoad();
-  });
+  }, []);
 
   return (
     <header data-testid="header-component">
