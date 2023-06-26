@@ -17,6 +17,7 @@ function Search() {
     const responseAlbum = await searchAlbumsAPI(inputValue);
     setAlbumList(responseAlbum);
   };
+
   const albumId = albumList.map((album) => album.collectionId);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
