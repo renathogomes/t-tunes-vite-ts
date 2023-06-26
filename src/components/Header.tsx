@@ -23,22 +23,22 @@ function Header() {
       ) : (
         <>
           <NavLink
-            to="./seach"
-            data-test="link-to-search"
+            to="/seach"
+            data-testid="link-to-search"
           >
             Pasquisar
 
           </NavLink>
           <NavLink
-            to="./favorites"
-            data-test="link-to-favorites"
+            to="/favorites"
+            data-testid="link-to-favorites"
           >
             Favoritos
 
           </NavLink>
           <NavLink
-            to="./profile"
-            data-test="link-to-profile"
+            to="/profile"
+            data-testid="link-to-profile"
           >
             Perfil
 
